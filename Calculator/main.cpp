@@ -67,6 +67,7 @@ void options() {
 	} while (true);
 }
 
+// confirm choices
 char finalConfirm() {
 	cout << "These are your choices:" << endl << endl;
 	cout << "Operation: ";
@@ -87,6 +88,8 @@ char finalConfirm() {
 		cout << "A error occurred...please retry!";
 		break;
 	}
+
+	// loop to avoid crashes
 	char confirm;
 	do {
 		cout << endl << "Please confirm them (y/n):";
@@ -94,7 +97,6 @@ char finalConfirm() {
 		cout << endl;
 		if (confirm == 'y') {
 			break;
-			return confirm;
 		}
 		else if (confirm == 'n') {
 			cout << "Okay, then lets try this again!" << endl;
@@ -104,12 +106,71 @@ char finalConfirm() {
 			cout << "Invalid input! Please use either 'y' or 'n'!" << endl;
 		}
 	} while (true);
+	return confirm;
 }
 
-double numInput() {
+// user inputed numbers
+double* calcNumbers = new double[calcSize];
+double result = NULL;
 
+// user input for numbers
+void numInput() {
+	for (int i = 0; i < calcSize; i++) {
+		cout << "Please enter number " << i + 1<< " : ";
+		cin >> calcNumbers[i];
+	}
 }
 
+// addition calculator
+void addition() {
+	for (int i = 0; i < calcSize; i++) {
+		result = result + calcNumbers[i];
+	}
+}
+
+// subtraction calculator
+void subtraction() {
+	for (int i = 0; i < calcSize; i++) {
+		result = result - calcNumbers[i];
+	}
+}
+
+// multiplication calculator
+void multiplication() {
+	result = calcNumbers[0];
+	for (int i = 1; i < calcSize; i++) {
+		result = result * calcNumbers[i];
+	}
+}
+
+// division calculator
+void division() {
+	result = calcNumbers[0];
+	for (int i = 0; i < calcSize; i++) {
+		result = result / calcNumbers[i];
+	}
+}
+
+// calculation master
+void numCalc() {
+	switch (calcOption) {
+	case 1:
+		addition();
+		break;
+	case 2:
+		subtraction();
+		break;
+	case 3:
+		multiplication();
+		break;
+	case 4:
+		division();
+		break;
+	default:
+		cout << "A error occurred!";
+		break;
+	}
+}
 
 int main() {
 	// hello message
@@ -144,5 +205,23 @@ int main() {
 		cout << endl << endl;
 
 		numInput();
+		numCalc();
+		cout << endl;
+		for (int i = 0; i <= 60; i++) {
+			cout << "-";
+		}
+		cout << endl << endl;
+		cout << "Your result is: " << result << "!" << endl << endl;
+		cout << "Do you wish to take another calculation? (y/n):";
+		char confirm;
+		cin >> confirm;
+		if (confirm == 'y') {
+			confirm = '\0';
+		}
+		else {
+			confirm = '\0';
+			cout << endl << "Very well, see you soon." << endl;
+			exit(0);
+		}
 	} while (true);
 }
