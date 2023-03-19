@@ -2,9 +2,6 @@
 #include <limits>
 using namespace std;
 
-int calcOption = 0;
-int calcSize = 0;
-
 // input error handling
 int inputChecker(string text) {
 	int output = 0;
@@ -15,6 +12,10 @@ int inputChecker(string text) {
 	}
 	return output;
 }
+
+// set options from "options" function
+int calcOption = 0;
+int calcSize = 0;
 
 // setting options for calculation
 void options() {
@@ -66,6 +67,50 @@ void options() {
 	} while (true);
 }
 
+char finalConfirm() {
+	cout << "These are your choices:" << endl << endl;
+	cout << "Operation: ";
+	switch (calcOption) {
+	case 1:
+		cout << "addition" << endl << "Amount: " << calcSize << endl;
+		break;
+	case 2:
+		cout << "subtraction" << endl << "Amount: " << calcSize << endl;
+		break;
+	case 3:
+		cout << "multiplication" << endl << "Amount: " << calcSize << endl;
+		break;
+	case 4:
+		cout << "division" << endl << "Amount: " << calcSize << endl;
+		break;
+	default:
+		cout << "A error occurred...please retry!";
+		break;
+	}
+	char confirm;
+	do {
+		cout << endl << "Please confirm them (y/n):";
+		cin >> confirm;
+		cout << endl;
+		if (confirm == 'y') {
+			break;
+			return confirm;
+		}
+		else if (confirm == 'n') {
+			cout << "Okay, then lets try this again!" << endl;
+			break;
+		}
+		else {
+			cout << "Invalid input! Please use either 'y' or 'n'!" << endl;
+		}
+	} while (true);
+}
+
+double numInput() {
+
+}
+
+
 int main() {
 	// hello message
 	cout << "Greetings user!" << endl << endl;
@@ -75,6 +120,29 @@ int main() {
 	}
 	cout << endl << endl;
 
-	// setting options for calculation
-	options();
+	do {
+		do { // setting options for calculation
+			options();
+
+			for (int i = 0; i <= 60; i++) {
+				cout << "-";
+			}
+			cout << endl << endl;
+
+			char confirm = finalConfirm();
+			if (confirm == 'y') {
+				confirm = '\0';
+				break;
+			}
+			else {
+				confirm = '\0';
+			}
+		} while (true);
+		for (int i = 0; i <= 60; i++) {
+			cout << "-";
+		}
+		cout << endl << endl;
+
+		numInput();
+	} while (true);
 }
